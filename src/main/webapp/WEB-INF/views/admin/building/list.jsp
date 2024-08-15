@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/common/taglib.jsp" %>
 <c:url var="buildingListURL" value="/admin/building-list"/>
+<c:url var="buildingAPI" value="/api/building"/>
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -86,7 +87,7 @@
                           <label>Quận</label> <br/>
                           <form:select class="form-control" path="district">
                             <form:option value="">---Chọn quận---</form:option>
-                            <form:options items="${districts}" />
+                            <form:options items="${districts}"/>
                           </form:select>
                         </div>
                       </div>
@@ -180,7 +181,7 @@
                           <br/>
                           <form:select class="form-control" path="staffId">
                             <form:option value="">---Chọn nhân viên---</form:option>
-                            <form:options items="${listStaffs}" />
+                            <form:options items="${listStaffs}"/>
                           </form:select>
                         </div>
                       </div>
@@ -188,7 +189,7 @@
                     <div class="row">
                       <div class="col-xs-12">
                         <div class="col-xs-6" style="padding: 0px">
-                          <form:checkboxes items="${typeCodes}" path="typeCode" />
+                          <form:checkboxes items="${typeCodes}" path="typeCode"/>
                         </div>
                       </div>
                     </div>
@@ -225,7 +226,7 @@
                   </svg>
                 </button>
               </a>
-              <button class="btn btn-danger" title="Xoá toà nhà">
+              <button class="btn btn-danger" title="Xoá toà nhà" id="btnDeleteBuilding">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                      class="bi bi-building-dash" viewBox="0 0 16 16">
                   <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7M11 12h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1 0-1"/>
@@ -242,7 +243,7 @@
       <!-- Table of list building -->
       <div class="row">
         <div class="col-xs-12">
-          <table id="simple-table" class="table table-striped table-bordered table-hover"
+          <table id="tableList" class="table table-striped table-bordered table-hover"
                  style="margin: 3em 0 1.5em;">
             <thead>
             <tr>
@@ -300,7 +301,7 @@
                       <i class="ace-icon fa fa-pencil bigger-120"></i>
                     </a>
 
-                    <button class="btn btn-xs btn-danger" title="Xoá toà nhà">
+                    <button class="btn btn-xs btn-danger" title="Xoá toà nhà" onclick="deleteBuilding(${b.id})">
                       <i class="ace-icon fa fa-trash-o bigger-120"></i>
                     </button>
                   </div>
@@ -365,7 +366,7 @@
 <script>
     function assignmentBuilding(buildingId) {
         $('#assignmentBuildingModal').modal();
-    }
+    };
 
     $('#btnAsignmentBuilding').click(function (e) {
         e.preventDefault();
@@ -381,7 +382,42 @@
     $('#btnSearchBuilding').click(function (e) {
         e.preventDefault();
         $('#listForm').submit();
-    })
+    });
+
+    function deleteBuilding(id) {
+        var buildingId = [id];
+        deleteBuildings(buildingId);
+    };
+
+    $('#btnDeleteBuilding').click(function (e) {
+        e.preventDefault();
+        var data = {}
+        var buildingIds = $('#tableList').find('tbody input[type=checkbox]:checked').map(function () {
+            return $(this).val();
+        }).get();
+        deleteBuilding(buildingIds);
+    });
+
+    function deleteBuildings(data) {
+        //call api
+        $.ajax({
+            type: "Delete",
+            url: "${buildingAPI}/" + data,
+            data: JSON.stringify(data), //đưa về dạng JSON
+            contentType: "application/json", //định nghĩa kiểu JSON trong post man
+            // data, contentType là từ client gửi xuống
+            dataType: "JSON",// định dạng data từ server gửi đi
+            success: function (respond) {
+                console.log("Success");
+            },
+            error: function (respond) {
+                console.log("Failed");
+                console.log(respond);
+            }
+        });
+    }
+
+
 </script>
 </body>
 </html>

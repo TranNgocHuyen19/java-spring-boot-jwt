@@ -39,6 +39,14 @@ public class BuildingController {
         item1.setManagerName("Trần Ngọc Huyền");
         item1.setManagerPhone("0964424149");
         responseList.add(item1);
+        BuildingSearchResponse item2 = new BuildingSearchResponse();
+        item2.setId(11L);
+        item2.setName("TNH Building");
+        item2.setAddress("Võ Thị Sáu, Phường 2, Quận Gò Vấp");
+        item2.setNumberOfBasement(1L);
+        item2.setManagerName("Trần Ngọc Huyền");
+        item2.setManagerPhone("0964424149");
+        responseList.add(item2);
         mav.addObject("buildings", responseList);
         mav.addObject("listStaffs", userService.getStaffs());
         mav.addObject("districts", districtCode.type());
@@ -49,6 +57,8 @@ public class BuildingController {
     @RequestMapping(value="/admin/building-edit", method=RequestMethod.GET)
     public ModelAndView buildingEdit(@ModelAttribute("building-edit") BuildingDTO buildingDTO, HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("admin/building/edit");
+        mav.addObject("districts", districtCode.type());
+        mav.addObject("typeCodes", buildingType.type());
         return mav;
     }
 
@@ -61,6 +71,8 @@ public class BuildingController {
         buildingDTO.setName("tnh tower");
         //Cầm building trả ra view
         mav.addObject("buildingEdit", buildingDTO);
+        mav.addObject("districts", districtCode.type());
+        mav.addObject("typeCodes", buildingType.type());
         return mav;
     }
 }
