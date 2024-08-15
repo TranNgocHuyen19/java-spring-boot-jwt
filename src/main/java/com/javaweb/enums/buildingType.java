@@ -19,7 +19,7 @@ public enum  buildingType {
     }
 
     public static Map<String,String> type(){
-        Map<String,String> listType = new HashMap<>();
+        Map<String,String> listType = new TreeMap<>();
         for(buildingType item : buildingType.values()){
             listType.put(item.toString() , item.name);
         }

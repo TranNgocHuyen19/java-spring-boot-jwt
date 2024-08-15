@@ -86,10 +86,7 @@
                           <label>Quận</label> <br/>
                           <form:select class="form-control" path="district">
                             <form:option value="">---Chọn quận---</form:option>
-                            <form:option value="Quan_1">Quận 1</form:option>
-                            <form:option value="Quan_2">Quận 2</form:option>
-                            <form:option value="Quan_3">Quận 3</form:option>
-                            <form:option value="Quan_10">Quận 10</form:option>
+                            <form:options items="${districts}" />
                           </form:select>
                         </div>
                       </div>
@@ -183,8 +180,7 @@
                           <br/>
                           <form:select class="form-control" path="staffId">
                             <form:option value="">---Chọn nhân viên---</form:option>
-                            <form:option value="2">Trần Ngọc Huyền</form:option>
-                            <form:option value="3">tnhxinhdep</form:option>
+                            <form:options items="${listStaffs}" />
                           </form:select>
                         </div>
                       </div>
@@ -192,15 +188,7 @@
                     <div class="row">
                       <div class="col-xs-12">
                         <div class="col-xs-6" style="padding: 0px">
-                          <label class="checkbox-inline">
-                            <input type="checkbox" name="typeCode" value="noi-that">Nội thất
-                          </label>
-                          <label class="checkbox-inline">
-                            <input type="checkbox" name="typeCode" value="nguyen-can">Nguyên căn
-                          </label>
-                          <label class="checkbox-inline">
-                            <input type="checkbox" name="typeCode" value="tang-tret">Tầng trệt
-                          </label>
+                          <form:checkboxes items="${typeCodes}" path="typeCode" />
                         </div>
                       </div>
                     </div>
@@ -308,7 +296,7 @@
                       <i class="ace-icon fa fa-exchange"></i>
                     </button>
 
-                    <a class="btn btn-xs btn-info" title="Sửa toà nhà" href="/admin/building-edit">
+                    <a class="btn btn-xs btn-info" title="Sửa toà nhà" href="/admin/building-edit-${b.id}">
                       <i class="ace-icon fa fa-pencil bigger-120"></i>
                     </a>
 

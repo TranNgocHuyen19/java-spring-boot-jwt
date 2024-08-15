@@ -11,9 +11,17 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>
-    Thêm toà nhà
-  </title>
+  <c:if test="${not empty buildingEdit.id}">
+    <title>
+      Sửa toà nhà
+    </title>
+  </c:if>
+  <c:if test="${empty buildingEdit.id}">
+    <title>
+      Thêm toà nhà
+    </title>
+  </c:if>
+
 </head>
 <body>
 <div class="main-content">
@@ -230,19 +238,53 @@
               <label class="col-xs-3"></label>
               <div class="col-xs-9">
                 <c:if test="${not empty buildingEdit.id}">
-                  <button type="button" class="btn btn-info" id="btnAddBuilding">Sửa toà nhà</button>
+                  <button type="button" class="btn btn-info" id="btnAddOrUpdateBuilding">Sửa toà nhà</button>
                 </c:if>
                 <c:if test="${empty buildingEdit.id}">
-                  <button type="button" class="btn btn-info" id="btnAddBuilding">Thêm toà nhà</button>
+                  <button type="button" class="btn btn-info" id="btnAddOrUpdateBuilding">Thêm toà nhà</button>
                 </c:if>
                 <button type="button" class="btn btn-danger">Huỷ thao tác</button>
               </div>
             </div>
+            <form:hidden path="id" />
           </form:form>
         </div>
       </div>
     </div><!-- /.page-content -->
   </div>
 </div><!-- /.main-content -->
+<script>
+    $('#btnAddOrUpdateBuilding').click(function () {
+        var data = {}; //data from postman -> JSON
+        var typeCode = [];
+        var formData = $('#form-edit').serializeArray();
+        $.each(formData, function (i, v) {
+            if (v.name != 'typeCode') {
+                data["" + v.name + ""] = v.value;
+            } else {
+                typeCode.push(v.value);
+            }
+        });
+        data['typeCode'] = typeCode;
+        console.log("OK");
+
+        //call api
+        $.ajax({
+            type: "POST",
+            url: "/admin/building",
+            data: JSON.stringify(data), //đưa về dạng JSON
+            contentType: "application/json", //định nghĩa kiểu JSON trong post man
+            // data, contentType là từ client gửi xuống
+            dataType: "JSON",// định dạng data từ server gửi đi
+            success: function (respond) {
+                console.log("Success");
+            },
+            error: function (respond) {
+                console.log("Failed");
+                console.log(respond);
+            }
+        });
+    });
+</script>
 </body>
 </html>

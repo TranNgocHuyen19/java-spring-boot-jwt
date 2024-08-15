@@ -2,9 +2,13 @@ package com.javaweb.controller.admin;
 
 
 
+import com.javaweb.enums.buildingType;
+import com.javaweb.enums.districtCode;
 import com.javaweb.model.dto.BuildingDTO;
 import com.javaweb.model.request.BuildingSearchRequest;
 import com.javaweb.model.response.BuildingSearchResponse;
+import com.javaweb.service.IUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +22,9 @@ import java.util.List;
 
 @Controller(value="buildingControllerOfAdmin")
 public class BuildingController {
+    @Autowired
+    private IUserService userService;
+
     @RequestMapping(value="/admin/building-list", method=RequestMethod.GET)
     public ModelAndView buildingList(@ModelAttribute BuildingSearchRequest buildingSearchRequest, HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("admin/building/list");
@@ -25,6 +32,7 @@ public class BuildingController {
         //Xuống DB
         List<BuildingSearchResponse> responseList = new ArrayList<>();
         BuildingSearchResponse item1 = new BuildingSearchResponse();
+        item1.setId(10L);
         item1.setName("ABC Building");
         item1.setAddress("12 Nguyễn Văn Bảo, Phuường 4, Quận Gò Vấp");
         item1.setNumberOfBasement(1L);
@@ -32,6 +40,9 @@ public class BuildingController {
         item1.setManagerPhone("0964424149");
         responseList.add(item1);
         mav.addObject("buildings", responseList);
+        mav.addObject("listStaffs", userService.getStaffs());
+        mav.addObject("districts", districtCode.type());
+        mav.addObject("typeCodes", buildingType.type());
         return mav;
     }
 
