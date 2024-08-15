@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/common/taglib.jsp" %>
+<c:url var="buildingAPI" value="/api/building" />
 
 <html>
 <head>
@@ -87,125 +88,120 @@
             <div class="form-group">
               <label for="structure" class="col-xs-3">Kết cấu</label>
               <div class="col-xs-9">
-                <input type="number" class="form-control" id="structure"
-                       name="structure">
+                 <form:input class="form-control" path="structure"/>
               </div>
             </div>
             <div class="form-group">
               <label for="numberOfBasement" class="col-xs-3">Số tầng hầm</label>
               <div class="col-xs-9">
-                <input type="number" class="form-control" id="numberOfBasement"
-                       name="numberOfBasement">
+                <form:input class="form-control" path="numberOfBasement"/>
               </div>
             </div>
             <div class="form-group">
               <label for="floorArea" class="col-xs-3">Diện tích sàn</label>
               <div class="col-xs-9">
-                <input type="number" class="form-control" id="floorArea" name="floorArea">
+                <form:input class="form-control" path="floorArea"/>
               </div>
             </div>
             <div class="form-group">
               <label for="direction" class="col-xs-3">Hướng</label>
               <div class="col-xs-9">
-                <input type="text" class="form-control" id="direction" name="direction">
+                 <form:input class="form-control" path="direction"/>
               </div>
             </div>
             <div class="form-group">
               <label for="level" class="col-xs-3">Hạng</label>
               <div class="col-xs-9">
-                <input type="text" class="form-control" id="level" name="level">
+                 <form:input class="form-control" path="level"/>
               </div>
             </div>
             <div class="form-group">
               <label for="rentArea" class="col-xs-3">Diện tích thuê</label>
               <div class="col-xs-9">
-                <input type="text" class="form-control" id="rentArea" name="rentArea">
+                 <form:input class="form-control" path="rentArea"/>
               </div>
             </div>
             <div class="form-group">
               <label for="rentPrice" class="col-xs-3">Giá thuê</label>
               <div class="col-xs-9">
-                <input type="number" class="form-control" id="rentPrice" name="rentPrice">
+                 <form:input class="form-control" path="rentPrice"/>
               </div>
             </div>
             <div class="form-group">
               <label for="rentPriceDescription" class="col-xs-3">Mô tả giá</label>
               <div class="col-xs-9">
-                <input type="text" class="form-control" id="rentPriceDescription"
-                       name="rentPriceDescription">
+                 <form:input class="form-control" path="rentPriceDescription"/>
               </div>
             </div>
             <div class="form-group">
               <label for="serviceFee" class="col-xs-3">Phí dịch vụ</label>
               <div class="col-xs-9">
-                <input type="text" class="form-control" id="serviceFee" name="serviceFee">
+                 <form:input class="form-control" path="serviceFee"/>
               </div>
             </div>
             <div class="form-group">
               <label for="carFee" class="col-xs-3">Phí ô tô</label>
               <div class="col-xs-9">
-                <input type="text" class="form-control" id="carFee" name="carFee">
+                 <form:input class="form-control" path="carFee"/>
               </div>
             </div>
             <div class="form-group">
               <label for="motorbikeFee" class="col-xs-3">Phí mô tô</label>
               <div class="col-xs-9">
-                <input type="text" class="form-control" id="motorbikeFee" name="motorbikeFee">
+                 <form:input class="form-control" path="motorbikeFee"/>
               </div>
             </div>
             <div class="form-group">
               <label for="overtimeFee" class="col-xs-3">Phí ngoài giờ</label>
               <div class="col-xs-9">
-                <input type="text" class="form-control" id="overtimeFee" name="overtimeFee">
+                <form:input class="form-control" path="overtimeFee"/>
               </div>
             </div>
             <div class="form-group">
               <label for="electricityFee" class="col-xs-3">Tiền điện</label>
               <div class="col-xs-9">
-                <input type="text" class="form-control" id="electricityFee" name="electricityFee">
+                 <form:input class="form-control" path="electricityFee"/>
               </div>
             </div>
             <div class="form-group">
               <label for="deposit" class="col-xs-3">Đặt cọc</label>
               <div class="col-xs-9">
-                <input type="text" class="form-control" id="deposit" name="deposit">
-              </div>
+                <form:input class="form-control" path="deposit"/>
             </div>
             <div class="form-group">
               <label for="payment" class="col-xs-3">Thanh toán</label>
               <div class="col-xs-9">
-                <input type="text" class="form-control" id="payment" name="payment">
+                 <form:input class="form-control" path="payment"/>
               </div>
             </div>
             <div class="form-group">
               <label for="rentTime" class="col-xs-3">Thời hạn thuê</label>
               <div class="col-xs-9">
-                <input type="text" class="form-control" id="rentTime" name="rentTime">
+                 <form:input class="form-control" path="rentTime"/>
               </div>
             </div>
             <div class="form-group">
               <label for="decorationTime" class="col-xs-3">Thời gian trang trí</label>
               <div class="col-xs-9">
-                <input type="text" class="form-control" id="decorationTime" name="decorationTime">
+                 <form:input class="form-control" path="decorationTime"/>
               </div>
             </div>
             <div class="form-group">
               <label for="managerName" class="col-xs-3">Tên quản lý</label>
               <div class="col-xs-9">
-                <input type="text" class="form-control" id="managerName" name="managerName">
+                 <form:input class="form-control" path="managerName"/>
               </div>
             </div>
             <div class="form-group">
-              <label for="managerPhoneNumber" class="col-xs-3">Số điện thoại quản lý</label>
+              <label for="managerPhone" class="col-xs-3">Số điện thoại quản lý</label>
               <div class="col-xs-9">
-                <input type="text" class="form-control" id="managerPhoneNumber"
-                       name="managerPhoneNumber">
+                 <form:input class="form-control" path="managerPhone"/>
               </div>
             </div>
             <div class="form-group">
               <label for="brokerageFee" class="col-xs-3">Phí môi giới</label>
               <div class="col-xs-9">
-                <input type="text" class="form-control" id="brokerageFee" name="brokerageFee">
+                 <form:input class="form-control" path="brokerageFee"/>
               </div>
             </div>
             <div class="form-group">
@@ -225,7 +221,7 @@
             <div class="form-group">
               <label for="note" class="col-xs-3">Ghi chú</label>
               <div class="col-xs-9">
-                <input type="text" class="form-control" id="note" name="note">
+                 <form:input class="form-control" path="note"/>
               </div>
             </div>
             <div class="form-group">
@@ -271,7 +267,7 @@
         //call api
         $.ajax({
             type: "POST",
-            url: "/admin/building",
+            url: "${buildingAPI}",
             data: JSON.stringify(data), //đưa về dạng JSON
             contentType: "application/json", //định nghĩa kiểu JSON trong post man
             // data, contentType là từ client gửi xuống
