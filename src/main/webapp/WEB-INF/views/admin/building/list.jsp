@@ -68,15 +68,15 @@
                       <div class="col-xs-6">
                         <div class="form-group" style="flex-wrap: wrap">
                           <label for="name">Tên toà nhà</label> <br>
-<%--                          <input type="text" class="form-control" id="name" name="name" value="${modelSearch.name}"/>--%>
-                              <form:input class="form-control" path="name" />
+                            <%--                          <input type="text" class="form-control" id="name" name="name" value="${modelSearch.name}"/>--%>
+                          <form:input class="form-control" path="name"/>
                         </div>
                       </div>
                       <div class="col-xs-6">
                         <div class="form-group" style="flex-wrap: wrap">
                           <label for="floorArea">Diện tích sàn</label> <br/>
-<%--                          <input type="number" class="form-control" id="floorArea" name="floorArea" value="${modelSearch.floorArea}"/>--%>
-                              <form:input class="form-control" path="floorArea"/>
+                            <%--                          <input type="number" class="form-control" id="floorArea" name="floorArea" value="${modelSearch.floorArea}"/>--%>
+                          <form:input class="form-control" path="floorArea"/>
                         </div>
                       </div>
                     </div>
@@ -96,14 +96,14 @@
                       <div class="col-xs-5">
                         <div class="form-group" style="flex-wrap: wrap">
                           <label for="ward">Phường</label> <br/>
-<%--                          <input type="text" class="form-control" id="ward" name="ward" value="${modelSearch.ward}"/>--%>
-                              <form:input class="form-control" path="ward"/>
+                            <%--                          <input type="text" class="form-control" id="ward" name="ward" value="${modelSearch.ward}"/>--%>
+                          <form:input class="form-control" path="ward"/>
                         </div>
                       </div>
                       <div class="col-xs-5">
                         <div class="form-group" style="flex-wrap: wrap">
                           <label for="street">Đường</label> <br/>
-<%--                          <input type="text" class="form-control" id="street" name="street" value="${modelSearch.street}"/>--%>
+                            <%--                          <input type="text" class="form-control" id="street" name="street" value="${modelSearch.street}"/>--%>
                           <form:input class="form-control" path="street"/>
                         </div>
                       </div>
@@ -112,22 +112,22 @@
                       <div class="col-xs-4">
                         <div class="form-group" style="flex-wrap: wrap">
                           <label for="numberOfBasement">Số tầng hầm</label> <br/>
-<%--                          <input type="text" class="form-control" id="numberOfBasement" name="numberOfBasement" value="${modelSearch.numberOfBasement}"/>--%>
-                              <form:input class="form-control" path="numberOfBasement"/>
+                            <%--                          <input type="text" class="form-control" id="numberOfBasement" name="numberOfBasement" value="${modelSearch.numberOfBasement}"/>--%>
+                          <form:input class="form-control" path="numberOfBasement"/>
                         </div>
                       </div>
                       <div class="col-xs-4">
                         <div class="form-group" style="flex-wrap: wrap">
                           <label for="direction">Hướng</label> <br/>
-<%--                          <input type="text" class="form-control" id="direction" name="direction" value="${modelSearch.direction}"/>--%>
-                              <form:input class="form-control" path="direction"/>
+                            <%--                          <input type="text" class="form-control" id="direction" name="direction" value="${modelSearch.direction}"/>--%>
+                          <form:input class="form-control" path="direction"/>
                         </div>
                       </div>
                       <div class="col-xs-4">
                         <div class="form-group" style="flex-wrap: wrap">
                           <label for="level">Hạng</label> <br/>
-<%--                          <input type="number" class="form-control" id="level" name="level" value="${modelSearch.level}"/>--%>
-                              <form:input class="form-control" path="level"/>
+                            <%--                          <input type="number" class="form-control" id="level" name="level" value="${modelSearch.level}"/>--%>
+                          <form:input class="form-control" path="level"/>
                         </div>
                       </div>
                     </div>
@@ -135,29 +135,29 @@
                       <div class="col-xs-3">
                         <div class="form-group" style="flex-wrap: wrap">
                           <label for="areaFrom">Diện tích từ</label> <br/>
-<%--                          <input type="text" class="form-control" id="areaFrom" name="areaFrom" value="${modelSearch.areaFrom}"/>--%>
+                            <%--                          <input type="text" class="form-control" id="areaFrom" name="areaFrom" value="${modelSearch.areaFrom}"/>--%>
                           <form:input class="form-control" path="areaFrom"/>
                         </div>
                       </div>
                       <div class="col-xs-3">
                         <div class="form-group" style="flex-wrap: wrap">
                           <label for="areaTo">Diện tích đến</label> <br/>
-<%--                          <input type="text" class="form-control" id="areaTo" name="areaTo" value="${modelSearch.areaTo}"/>--%>
-                               <form:input class="form-control" path="areaTo"/>
+                            <%--                          <input type="text" class="form-control" id="areaTo" name="areaTo" value="${modelSearch.areaTo}"/>--%>
+                          <form:input class="form-control" path="areaTo"/>
                         </div>
                       </div>
                       <div class="col-xs-3">
                         <div class="form-group" style="flex-wrap: wrap">
                           <label for="rentPriceFrom">Giá thuê từ</label> <br/>
-<%--                          <input type="text" class="form-control" id="rentPriceFrom" name="rentPriceFrom" value="${modelSearch.rentPriceFrom}"/>--%>
-                              <form:input class="form-control" path="rentPriceFrom"/>
+                            <%--                          <input type="text" class="form-control" id="rentPriceFrom" name="rentPriceFrom" value="${modelSearch.rentPriceFrom}"/>--%>
+                          <form:input class="form-control" path="rentPriceFrom"/>
                         </div>
                       </div>
                       <div class="col-xs-3">
                         <div class="form-group" style="flex-wrap: wrap">
                           <label for="rentPriceTo">Giá thuê đến</label> <br/>
-<%--                          <input type="text" class="form-control" id="rentPriceTo" name="rentPriceTo" value="${modelSearch.rentPriceTo}"/>--%>
-                              <form:input class="form-control" path="rentPriceTo"/>
+                            <%--                          <input type="text" class="form-control" id="rentPriceTo" name="rentPriceTo" value="${modelSearch.rentPriceTo}"/>--%>
+                          <form:input class="form-control" path="rentPriceTo"/>
                         </div>
                       </div>
                     </div>
@@ -165,7 +165,7 @@
                       <div class="col-xs-4">
                         <div class="form-group" style="flex-wrap: wrap">
                           <label for="managerName">Tên quản lý</label> <br/>
-<%--                          <input type="text" class="form-control" id="managerName" name="managerName" value="${modelSearch.managerName}"/>--%>
+                            <%--                          <input type="text" class="form-control" id="managerName" name="managerName" value="${modelSearch.managerName}"/>--%>
                           <form:input class="form-control" path="managerName"/>
                         </div>
                       </div>
@@ -173,8 +173,8 @@
                         <div class="form-group" style="flex-wrap: wrap">
                           <label for="managerPhone">Điện thoại quản
                             lý</label> <br/>
-<%--                          <input type="text" class="form-control" id="managerPhone" name="managerPhone" value="${modelSearch.managerPhone}"/>--%>
-                              <form:input class="form-control" path="managerPhone"/>
+                            <%--                          <input type="text" class="form-control" id="managerPhone" name="managerPhone" value="${modelSearch.managerPhone}"/>--%>
+                          <form:input class="form-control" path="managerPhone"/>
                         </div>
                       </div>
                       <div class="col-xs-2">
@@ -280,43 +280,46 @@
             </thead>
 
             <tbody>
-            <tr>
-              <td class="center">
-                <label class="pos-rel">
-                  <input type="checkbox" class="ace">
-                  <span class="lbl"></span>
-                </label>
-              </td>
+            <c:forEach var="b" items="${buildings}">
+              <tr>
+                <td class="center">
+                  <label class="pos-rel">
+                    <input type="checkbox" class="ace" name="checkList" value="${b.id}">
+                    <span class="lbl"></span>
+                  </label>
+                </td>
 
-              <td>
-                ACM Building
-              </td>
-              <td>59 phan xích long, Phường 2, Quận 1</td>
-              <td>2</td>
-              <td>Trần Ngọc Huyền</td>
-              <td>0964424149</td>
-              <td>800</td>
-              <td></td>
-              <td>100, 200, 300</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td>
-                <div class="hidden-sm hidden-xs btn-group">
-                  <button class="btn btn-xs btn-success" title="Giao toà nhà" onclick="assignmentBuilding(1)">
-                    <i class="ace-icon fa fa-exchange"></i>
-                  </button>
+                <td>
+                    ${b.name}
+                </td>
+                <td>${b.address}</td>
+                <td>${b.numberOfBasement}</td>
+                <td>${b.managerName}</td>
+                <td>${b.managerPhoneNumber}</td>
+                <td>${b.floorArea}</td>
+                <td>${b.emptyArea}</td>
+                <td>${b.rentArea}</td>
+                <td>${b.rentPrice}</td>
+                <td>${b.brokerageFee}</td>
+                <td>${b.serviceFee}</td>
+                <td>
+                  <div class="hidden-sm hidden-xs btn-group">
+                    <button class="btn btn-xs btn-success" title="Giao toà nhà" onclick="assignmentBuilding(${b.id})">
+                      <i class="ace-icon fa fa-exchange"></i>
+                    </button>
 
-                  <a class="btn btn-xs btn-info" title="Sửa toà nhà" href="/admin/building-edit">
-                    <i class="ace-icon fa fa-pencil bigger-120"></i>
-                  </a>
+                    <a class="btn btn-xs btn-info" title="Sửa toà nhà" href="/admin/building-edit">
+                      <i class="ace-icon fa fa-pencil bigger-120"></i>
+                    </a>
 
-                  <button class="btn btn-xs btn-danger" title="Xoá toà nhà">
-                    <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                  </button>
-                </div>
-              </td>
-            </tr>
+                    <button class="btn btn-xs btn-danger" title="Xoá toà nhà">
+                      <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </c:forEach>
+
             </tbody>
           </table>
         </div><!-- /.span -->
