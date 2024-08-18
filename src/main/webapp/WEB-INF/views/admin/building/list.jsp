@@ -259,7 +259,6 @@
               <th>Tên quản lý</th>
               <th>Số điện thoại</th>
               <th>DT sàn</th>
-              <th>DT trống</th>
               <th>DT thuê</th>
               <th>Giá thuê</th>
               <th>Phí môi giới</th>
@@ -286,7 +285,6 @@
                 <td>${b.managerName}</td>
                 <td>${b.managerPhoneNumber}</td>
                 <td>${b.floorArea}</td>
-                <td>${b.emptyArea}</td>
                 <td>${b.rentArea}</td>
                 <td>${b.rentPrice}</td>
                 <td>${b.brokerageFee}</td>

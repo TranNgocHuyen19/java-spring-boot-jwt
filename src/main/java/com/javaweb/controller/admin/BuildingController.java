@@ -7,6 +7,7 @@ import com.javaweb.enums.districtCode;
 import com.javaweb.model.dto.BuildingDTO;
 import com.javaweb.model.request.BuildingSearchRequest;
 import com.javaweb.model.response.BuildingSearchResponse;
+import com.javaweb.service.IBuildingService;
 import com.javaweb.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,28 +26,15 @@ public class BuildingController {
     @Autowired
     private IUserService userService;
 
+    @Autowired
+    private IBuildingService buildingService;
+
     @RequestMapping(value="/admin/building-list", method=RequestMethod.GET)
     public ModelAndView buildingList(@ModelAttribute BuildingSearchRequest buildingSearchRequest, HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("admin/building/list");
         mav.addObject("modelSearch", buildingSearchRequest);
         //Xuống DB
-        List<BuildingSearchResponse> responseList = new ArrayList<>();
-        BuildingSearchResponse item1 = new BuildingSearchResponse();
-        item1.setId(10L);
-        item1.setName("ABC Building");
-        item1.setAddress("12 Nguyễn Văn Bảo, Phuường 4, Quận Gò Vấp");
-        item1.setNumberOfBasement(1L);
-        item1.setManagerName("Trần Ngọc Huyền");
-        item1.setManagerPhone("0964424149");
-        responseList.add(item1);
-        BuildingSearchResponse item2 = new BuildingSearchResponse();
-        item2.setId(11L);
-        item2.setName("TNH Building");
-        item2.setAddress("Võ Thị Sáu, Phường 2, Quận Gò Vấp");
-        item2.setNumberOfBasement(1L);
-        item2.setManagerName("Trần Ngọc Huyền");
-        item2.setManagerPhone("0964424149");
-        responseList.add(item2);
+        List<BuildingSearchResponse> responseList = buildingService.findByCriteria(buildingSearchRequest);
         mav.addObject("buildings", responseList);
         mav.addObject("listStaffs", userService.getStaffs());
         mav.addObject("districts", districtCode.type());
