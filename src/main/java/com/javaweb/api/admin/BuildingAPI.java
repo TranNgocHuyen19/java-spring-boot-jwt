@@ -20,7 +20,6 @@ public class BuildingAPI {
 
     @DeleteMapping("/{ids}")
     public void deleteBuilding(@RequestBody List<Long> ids) {
-        //Xuống DB để xoá building theo danh sách id gửi về
-        System.out.println("tnhxinhdep");
+        buildingService.deleteBuildings(ids);
     }
 }

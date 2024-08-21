@@ -66,11 +66,22 @@ public class BuildingServiceImpl implements IBuildingService {
         System.out.println("Success");
     }
 
+    @Transactional
     @Override
     public BuildingDTO findBuildingById(Long id) {
         BuildingEntity buildingEntity = buildingRepository.findById(id).get();
         BuildingDTO result = buildingConverter.convertToDTO(buildingEntity);
         return result;
     }
+
+    @Transactional
+    @Override
+    public void deleteBuildings(List<Long> ids) {
+        for(Long id : ids) {
+            rentAreaRepository.deleteByBuildingId(id);
+        }
+        buildingRepository.deleteByIdIn(ids);
+    }
+
 
 }
