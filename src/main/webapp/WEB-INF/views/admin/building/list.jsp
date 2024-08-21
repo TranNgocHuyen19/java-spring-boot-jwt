@@ -389,10 +389,11 @@
 
     $('#btnDeleteBuilding').click(function (e) {
         e.preventDefault();
-        var data = {}
+        // var data = {}
         var buildingIds = $('#tableList').find('tbody input[type=checkbox]:checked').map(function () {
             return $(this).val();
         }).get();
+
         deleteBuilding(buildingIds);
     });
 

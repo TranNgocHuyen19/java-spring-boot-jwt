@@ -19,7 +19,7 @@ public class BuildingAPI {
     }
 
     @DeleteMapping("/{ids}")
-    public void deleteBuilding(@RequestBody List<Long> ids) {
+    public void deleteBuilding(@PathVariable List<Long> ids) {
         buildingService.deleteBuildings(ids);
     }
 }
