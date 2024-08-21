@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller(value="buildingControllerOfAdmin")
@@ -43,7 +42,7 @@ public class BuildingController {
     }
 
     @RequestMapping(value="/admin/building-edit", method=RequestMethod.GET)
-    public ModelAndView buildingEdit(@ModelAttribute("building-edit") BuildingDTO buildingDTO, HttpServletRequest request) {
+    public ModelAndView buildingEdit(@ModelAttribute("buildingEdit") BuildingDTO buildingDTO, HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("admin/building/edit");
         mav.addObject("districts", districtCode.type());
         mav.addObject("typeCodes", buildingType.type());
@@ -54,9 +53,7 @@ public class BuildingController {
     public ModelAndView buildingEdit(@PathVariable("id") Long id, HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("admin/building/edit");
         //Xuống DB tìm building theo id
-        BuildingDTO buildingDTO = new BuildingDTO();
-        buildingDTO.setId(id);
-        buildingDTO.setName("tnh tower");
+        BuildingDTO buildingDTO = buildingService.findBuildingById(id);
         //Cầm building trả ra view
         mav.addObject("buildingEdit", buildingDTO);
         mav.addObject("districts", districtCode.type());

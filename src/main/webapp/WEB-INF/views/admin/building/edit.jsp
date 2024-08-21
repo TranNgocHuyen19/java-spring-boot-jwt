@@ -48,14 +48,21 @@
 
 
       <div class="page-header">
-        <h1>
-          Cập nhật thông tin toà nhà
-        </h1>
+        <c:if test="${not empty buildingEdit.id}">
+          <h1>
+            Cập nhật thông tin toà nhà
+          </h1>
+        </c:if>
+        <c:if test="${empty buildingEdit.id}">
+          <h1>
+            Thêm toà nhà
+          </h1>
+        </c:if>
       </div><!-- /.page-header -->
 
       <div class="row">
         <div class="col-xs-12" style="font-family:'Times New Roman', Times, serif;">
-          <form:form id="form-edit" class="form-horizontal" modelAttribute="building-edit" method="GET">
+          <form:form id="form-edit" class="form-horizontal" modelAttribute="buildingEdit" method="GET">
             <div class="form-group">
               <label for="name" class="col-xs-3">Tên toà nhà</label>
               <div class="col-xs-9">
@@ -257,8 +264,8 @@
         data['typeCode'] = typeCode;
         console.log("OK");
         //Nên xử lý là có data gì không rồi hẳn add, nên check rỗng của những field quan trọng
-        if(typeCode != '') {
-          addOrUpdateBuilding(data);
+        if (typeCode != '') {
+            addOrUpdateBuilding(data);
         } else {
             window.location.href = "<c:url value="/admin/building-edit?typeCode=require" />";
         }

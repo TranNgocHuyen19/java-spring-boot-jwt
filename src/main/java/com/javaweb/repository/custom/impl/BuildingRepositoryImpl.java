@@ -103,8 +103,8 @@ public class BuildingRepositoryImpl implements BuildingRepositoryCustom {
         StringBuilder sql = new StringBuilder("SELECT b.* FROM building b");
         joinTable(buildingSearchRequest, sql);
         StringBuilder where = new StringBuilder(" WHERE 1 = 1");
-        queryNormal(buildingSearchRequest, where);
-        querySpecial(buildingSearchRequest, where);
+//        queryNormal(buildingSearchRequest, where);
+//        querySpecial(buildingSearchRequest, where);
         where.append(" GROUP BY b.id");
         sql.append(where);
         Query query = entityManager.createNativeQuery(sql.toString(), BuildingEntity.class);

@@ -14,7 +14,7 @@ public class BuildingDTO extends AbstractDTO{
     private Long floorArea;
     private String direction;
     private Long level;
-    private Long rentArea;
+    private String rentArea;
     private Long rentPrice;
     private String rentPriceDescription;
     private String serviceFee;
@@ -35,6 +35,7 @@ public class BuildingDTO extends AbstractDTO{
     private String avatar;
     private String managerName;
     private String managerPhone;
+
 
     public String getName() {
         return name;
@@ -76,11 +77,11 @@ public class BuildingDTO extends AbstractDTO{
         this.structure = structure;
     }
 
-    public Long getRentArea() {
+    public String getRentArea() {
         return rentArea;
     }
 
-    public void setRentArea(Long rentArea) {
+    public void setRentArea(String rentArea) {
         this.rentArea = rentArea;
     }
 

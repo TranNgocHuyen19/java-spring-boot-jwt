@@ -59,10 +59,10 @@ public class BuildingEntity extends BaseEntity{
     private String overtimeFee;
 
     @Column(name = "waterfee")
-    private String waterfee;
+    private String waterFee;
 
     @Column(name = "electricityfee")
-    private String electricityfee;
+    private String electricityFee;
 
     @Column(name = "deposit")
     private String deposit;
@@ -233,20 +233,20 @@ public class BuildingEntity extends BaseEntity{
         this.overtimeFee = overtimeFee;
     }
 
-    public String getWaterfee() {
-        return waterfee;
+    public String getWaterFee() {
+        return waterFee;
     }
 
-    public void setWaterfee(String waterfee) {
-        this.waterfee = waterfee;
+    public void setWaterFee(String waterFee) {
+        this.waterFee = waterFee;
     }
 
-    public String getElectricityfee() {
-        return electricityfee;
+    public String getElectricityFee() {
+        return electricityFee;
     }
 
-    public void setElectricityfee(String electricityfee) {
-        this.electricityfee = electricityfee;
+    public void setElectricityFee(String electricityFee) {
+        this.electricityFee = electricityFee;
     }
 
     public String getDeposit() {
