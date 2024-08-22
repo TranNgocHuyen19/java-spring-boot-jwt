@@ -9,10 +9,6 @@ import java.util.List;
 public class BuildingEntity extends BaseEntity{
     private static final long serialVersionUID = -4988455421375043688L;
 
-    @Id
-    @GeneratedValue
-    private Long id;
-
     @Column(name = "name")
     private String name;
 
@@ -103,14 +99,15 @@ public class BuildingEntity extends BaseEntity{
     @OneToMany(mappedBy = "building", fetch = FetchType.LAZY)
     private List<RentAreaEntity> rentAreaEntities = new ArrayList<>();
 
-    @Override
-    public Long getId() {
-        return id;
+    @OneToMany(mappedBy = "buildingEntity", fetch = FetchType.LAZY)
+    private List<AssignmentBuildingEntity> assignmentBuildingEntities = new ArrayList<>();
+
+    public List<AssignmentBuildingEntity> getAssignmentBuildingEntities() {
+        return assignmentBuildingEntities;
     }
 
-    @Override
-    public void setId(Long id) {
-        this.id = id;
+    public void setAssignmentBuildingEntities(List<AssignmentBuildingEntity> assignmentBuildingEntities) {
+        this.assignmentBuildingEntities = assignmentBuildingEntities;
     }
 
     public String getName() {

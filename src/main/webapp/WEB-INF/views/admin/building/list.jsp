@@ -333,22 +333,6 @@
           </tr>
           </thead>
           <tbody>
-          <tr>
-            <td class="center">
-              <input type="checkbox" id="checkbox_1" value="1">
-            </td>
-            <td>
-              tnhxinhdep
-            </td>
-          </tr>
-          <tr>
-            <td class="center">
-              <input type="checkbox" id="checkbox_2" value="2">
-            </td>
-            <td>
-              Trần Ngọc Huyền
-            </td>
-          </tr>
           </tbody>
         </table>
         <input type="hidden" id="buildingId" name="buildingId" value="1">
@@ -364,7 +348,36 @@
 <script>
     function assignmentBuilding(buildingId) {
         $('#assignmentBuildingModal').modal();
+        loadStaff(buildingId);
+        $('#buildingId').val();
     };
+
+    function loadStaff(buildingId) {
+        $.ajax({
+            type: "GET",
+            url: "${buildingAPI}/" + buildingId + '/staffs',
+            // data: JSON.stringify(), //đưa về dạng JSON
+            // contentType: "application/json", //định nghĩa kiểu JSON trong post man
+            // data, contentType là từ client gửi xuống
+            dataType: "JSON",// định dạng data từ server gửi đi
+            success: function (response) {
+                var row = '';
+                $.each(response.data, function(index, item) {
+                  row += '<tr>';
+                  row += '<td class="center"> <input type="checkbox" value=' + item.staffId + ' ' + 'id="checkbox_' + item.staffId + '" ' + item.checked  + '/></td>';
+                  row += '<td>' + item.fullName + '</td>'
+                  row += '</tr>';
+                });
+                $('#staffList tbody').html(row);
+                console.log("Success");
+            },
+            error: function (response) {
+                console.log("Failed");
+                window.location.href = "<c:url value="/admin/building-list?message=error" />"
+                console.log(response);
+            }
+        });
+    }
 
     $('#btnAsignmentBuilding').click(function (e) {
         e.preventDefault();
