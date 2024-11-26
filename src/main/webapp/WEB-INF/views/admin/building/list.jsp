@@ -307,8 +307,46 @@
               </tr>
             </c:forEach>
 
+
+
             </tbody>
           </table>
+          <nav aria-label="Page navigation example" class="text-right">
+            <ul class="pagination">
+              <c:if test="${modelSearch.page > 1}">
+                <li class="page-item">
+                  <a class="page-link" href="?page=${modelSearch.page - 1}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                  </a>
+                </li>
+              </c:if>
+              <c:if test="${modelSearch.page <= 1}">
+                <li class="page-item disabled">
+                  <span class="page-link" aria-hidden="true">&laquo;</span>
+                </li>
+              </c:if>
+              <c:forEach begin="1" end="${modelSearch.totalPage}" var="p">
+                <li class="page-item ${p == modelSearch.page ? 'active' : ''}">
+                  <a class="page-link" href="?page=${p}">${p}</a>
+                </li>
+              </c:forEach>
+              <c:if test="${modelSearch.page < modelSearch.totalPage}">
+                <li class="page-item">
+                  <a class="page-link" href="?page=${modelSearch.page + 1}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                  </a>
+                </li>
+              </c:if>
+              <c:if test="${modelSearch.page >= modelSearch.totalPage}">
+                <li class="page-item disabled">
+                  <span class="page-link" aria-hidden="true">&raquo;</span>
+                </li>
+              </c:if>
+            </ul>
+          </nav>
+
         </div><!-- /.span -->
       </div>
       <!-- END Table of list building -->
@@ -335,7 +373,7 @@
           <tbody>
           </tbody>
         </table>
-        <input type="hidden" id="buildingId" name="buildingId" value="1">
+        <input type="hidden" id="buildingId" name="buildingId" value="">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-success" id="btnAsignmentBuilding">Giao toà nhà</button>
@@ -349,16 +387,13 @@
     function assignmentBuilding(buildingId) {
         $('#assignmentBuildingModal').modal();
         loadStaff(buildingId);
-        $('#buildingId').val();
+        $('#buildingId').val(buildingId);
     };
 
     function loadStaff(buildingId) {
         $.ajax({
             type: "GET",
             url: "${buildingAPI}/" + buildingId + '/staffs',
-            // data: JSON.stringify(), //đưa về dạng JSON
-            // contentType: "application/json", //định nghĩa kiểu JSON trong post man
-            // data, contentType là từ client gửi xuống
             dataType: "JSON",// định dạng data từ server gửi đi
             success: function (response) {
                 var row = '';
@@ -387,8 +422,33 @@
             return $(this).val();
         }).get();
         data['staffs'] = staffs;
+        if(data['staffs'] != "") {
+            callApiAssignmentBuilding(data)
+        }
         console.log('OK');
     });
+
+    function callApiAssignmentBuilding(data) {
+        $.ajax({
+            type: "POST",
+            url: "${buildingAPI}" + '/assignmentbuilding',
+            data: JSON.stringify(data), //đưa về dạng JSON
+            contentType: "application/json", //định nghĩa kiểu JSON trong post man
+            // data, contentType là từ client gửi xuống
+            // dataType: "JSON",// định dạng data từ server gửi đi
+            success: function (response) {
+                window.location.href = "<c:url value="/admin/building-list"/>"
+                 console.log(response);
+                // console.log("Success");
+            },
+            error: function (response) {
+                 console.log(response);
+                console.info("Giao toà nhà không thành công")
+                window.location.href = "<c:url value="/admin/building-list?message=error" />"
+
+            }
+        });
+    }
 
     $('#btnSearchBuilding').click(function (e) {
         e.preventDefault();
@@ -418,11 +478,13 @@
             data: JSON.stringify(data), //đưa về dạng JSON
             contentType: "application/json", //định nghĩa kiểu JSON trong post man
             // data, contentType là từ client gửi xuống
-            dataType: "JSON",// định dạng data từ server gửi đi
+            // dataType: "JSON",// định dạng data từ server gửi đi
             success: function (respond) {
+              window.location.href = "<c:url value="/admin/building-list"/>"
                 console.log("Success");
             },
             error: function (respond) {
+                window.location.href = "<c:url value="/admin/building-list?message=error" />"
                 console.log("Failed");
                 console.log(respond);
             }

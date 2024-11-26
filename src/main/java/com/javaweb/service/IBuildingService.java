@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface IBuildingService {
     List<BuildingSearchResponse> findByCriteria(BuildingSearchRequest buildingSearchRequest);
+    int calcTotalItem(BuildingSearchRequest buildingSearchRequest);
     void addOrUpdateBuilding(BuildingDTO buildingDTO);
     BuildingDTO findBuildingById(Long id);
     void deleteBuildings(List<Long> ids);

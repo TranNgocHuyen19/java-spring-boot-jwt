@@ -37,13 +37,13 @@ public class BuildingRepositoryImpl implements BuildingRepositoryCustom {
 
     public static void queryNormal(BuildingSearchRequest buildingSearchRequest, StringBuilder where) {
         try {
-            Field[] fields = BuildingEntity.class.getDeclaredFields();
+            Field[] fields = BuildingSearchRequest.class.getDeclaredFields();
             for (Field item : fields) {
                 item.setAccessible(true);
                 String name = item.getName();
                 if(!name.equals("staffId") && !name.startsWith("area") && !name.startsWith("rentPrice") && !name.equals("typeCode")) {
                     Object value = item.get(buildingSearchRequest);
-                    if(value != null) {
+                    if(value != null && !value.equals("")) {
                         if(item.getType().getName().equals("java.lang.Long") || item.getType().getName().equals("java.lang.Integer")) {
                             where.append(" AND b." + name + "=" + value);
                         } else if (item.getType().getName().equals("java.lang.String")) {
@@ -61,7 +61,7 @@ public class BuildingRepositoryImpl implements BuildingRepositoryCustom {
     public static void querySpecial(BuildingSearchRequest buildingSearchRequest, StringBuilder where) {
         Long staffId = buildingSearchRequest.getStaffId();
         if(staffId != null) {
-            where.append(" AND ad.staffid = " + staffId);
+            where.append(" AND ab.staffid = " + staffId);
         }
 
         Long areaFrom = buildingSearchRequest.getAreaFrom();
@@ -103,11 +103,26 @@ public class BuildingRepositoryImpl implements BuildingRepositoryCustom {
         StringBuilder sql = new StringBuilder("SELECT b.* FROM building b");
         joinTable(buildingSearchRequest, sql);
         StringBuilder where = new StringBuilder(" WHERE 1 = 1");
-//        queryNormal(buildingSearchRequest, where);
-//        querySpecial(buildingSearchRequest, where);
+        queryNormal(buildingSearchRequest, where);
+        querySpecial(buildingSearchRequest, where);
+        where.append(" GROUP BY b.id");
+        sql.append(where);
+        int skip = ( buildingSearchRequest.getPage() - 1 ) * buildingSearchRequest.getLimit();
+        sql.append(" LIMIT " + buildingSearchRequest.getLimit() + " OFFSET " + skip);
+        Query query = entityManager.createNativeQuery(sql.toString(), BuildingEntity.class);
+        return query.getResultList();
+    }
+
+    @Override
+    public int calcTotalItem(BuildingSearchRequest buildingSearchRequest) {
+        StringBuilder sql = new StringBuilder("SELECT b.* FROM building b");
+        joinTable(buildingSearchRequest, sql);
+        StringBuilder where = new StringBuilder(" WHERE 1 = 1");
+        queryNormal(buildingSearchRequest, where);
+        querySpecial(buildingSearchRequest, where);
         where.append(" GROUP BY b.id");
         sql.append(where);
         Query query = entityManager.createNativeQuery(sql.toString(), BuildingEntity.class);
-        return query.getResultList();
+        return query.getResultList().size();
     }
 }

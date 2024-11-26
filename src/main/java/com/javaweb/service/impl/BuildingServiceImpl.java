@@ -14,7 +14,9 @@ import com.javaweb.model.response.StaffResponseDTO;
 import com.javaweb.repository.BuildingRepository;
 import com.javaweb.repository.RentAreaRepository;
 import com.javaweb.repository.UserRepository;
+import com.javaweb.repository.custom.AssignmentBuildingRepositoryCustom;
 import com.javaweb.repository.custom.BuildingRepositoryCustom;
+import com.javaweb.repository.custom.RentAreaRepositoryCustom;
 import com.javaweb.service.IBuildingService;
 import com.javaweb.utils.RentAreaUltis;
 import com.javaweb.utils.SplitUltis;
@@ -38,7 +40,13 @@ public class BuildingServiceImpl implements IBuildingService {
     private RentAreaRepository rentAreaRepository;
 
     @Autowired
+    private RentAreaRepositoryCustom rentAreaRepositoryCustom;
+
+    @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private AssignmentBuildingRepositoryCustom assignmentBuildingRepositoryCustom;
 
     @Autowired
     private BuildingSearchResponseConverter buildingSearchResponseConverter;
@@ -58,6 +66,11 @@ public class BuildingServiceImpl implements IBuildingService {
         return responseList;
     }
 
+    @Override
+    public int calcTotalItem(BuildingSearchRequest buildingSearchRequest) {
+        return buildingRepositoryCustom.calcTotalItem(buildingSearchRequest);
+    }
+
     @Transactional
     @Override
     public void addOrUpdateBuilding(BuildingDTO buildingDTO) {
@@ -71,7 +84,6 @@ public class BuildingServiceImpl implements IBuildingService {
             ra.setValue(it);
             rentAreaRepository.save(ra);
         }
-        System.out.println("Success");
     }
 
     @Transactional
@@ -86,7 +98,8 @@ public class BuildingServiceImpl implements IBuildingService {
     @Override
     public void deleteBuildings(List<Long> ids) {
         for (Long id : ids) {
-            rentAreaRepository.deleteByBuildingId(id);
+            rentAreaRepositoryCustom.deleteByBuildingId(id);
+            assignmentBuildingRepositoryCustom.deleteByBuildingId(id);
         }
         buildingRepository.deleteByIdIn(ids);
     }
@@ -96,24 +109,25 @@ public class BuildingServiceImpl implements IBuildingService {
         BuildingEntity building = buildingRepository.findById(buildingId).get();
         List<UserEntity> staffs = userRepository.findByStatusAndRoles_Code(1, "STAFF");
         List<UserEntity> staffAssignment = new ArrayList<>();
-        for(AssignmentBuildingEntity it : building.getAssignmentBuildingEntities()) {
-            staffAssignment.add(it.getUserEntity());
+        for (AssignmentBuildingEntity assignmentBuildingEntity : building.getAssignmentBuildingEntities()) {
+            staffAssignment.add(assignmentBuildingEntity.getUserEntity());
         }
-        ResponseDTO result = new ResponseDTO();
         List<StaffResponseDTO> staffResponseDTOS = new ArrayList<>();
-        for(UserEntity it : staffs) {
+        ResponseDTO responseDTO = new ResponseDTO();
+        for(UserEntity user:staffs) {
             StaffResponseDTO staffResponseDTO = new StaffResponseDTO();
-            staffResponseDTO.setFullName(it.getFullName());
-            staffResponseDTO.setStaffId(it.getId());
-            if(staffAssignment.contains(it)) {
+            staffResponseDTO.setStaffId(user.getId());
+            staffResponseDTO.setFullName(user.getFullName());
+            if(staffAssignment.contains(user)) {
                 staffResponseDTO.setChecked("checked");
             } else {
                 staffResponseDTO.setChecked("");
             }
             staffResponseDTOS.add(staffResponseDTO);
         }
-        result.setData(staffResponseDTOS);
-        result.setMessage("Success");
-        return result;
+        responseDTO.setMessage("Success");
+        responseDTO.setData(staffResponseDTOS);
+        responseDTO.setDetail("Yayyyyyyyyyyy");
+        return responseDTO;
     }
 }

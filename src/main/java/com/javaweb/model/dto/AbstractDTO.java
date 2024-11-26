@@ -120,8 +120,8 @@ public class AbstractDTO<T> implements Serializable {
         return totalPage;
     }
 
-    public void setTotalPage(Integer totalPage) {
-        this.totalPage = totalPage;
+    public void setTotalPage() {
+        this.totalPage = (int) Math.ceil((double) totalItems / limit);
     }
 
     public Integer getTotalItem() {

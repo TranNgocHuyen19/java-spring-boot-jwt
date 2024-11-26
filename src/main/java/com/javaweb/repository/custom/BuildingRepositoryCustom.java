@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface BuildingRepositoryCustom {
     List<BuildingEntity> findByCriteria(BuildingSearchRequest buildingSearchRequest);
+
+    int calcTotalItem(BuildingSearchRequest buildingSearchRequest);
 }
